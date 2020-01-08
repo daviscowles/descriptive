@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Alter Reimbursement Award</title>
+</head>
+<body>
+
+	<h3>Reimbursement ID</h3>
+	<input id="rid" type="number">
+	<h3>Alter reimbursement award to:</h3>
+	<input id="nid" type="number">
+	
+	<button onclick="alterReimb()">Alter</button>
+	<p id="r_id"></p>
+	
+
+</body>
+
+<script>
+
+	function alterReimb() {
+		
+        let r_id = document.getElementById("rid").value;
+        console.log(r_id);
+        let new_reimb = document.getElementById("nid").value;
+        console.log(new_reimb);
+		
+		let xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function() {
+			
+			if(this.readyState == 4 && this.status == 200) {
+				
+				console.log(this.responseText);
+				
+				
+				
+				
+								 	
+				
+				document.getElementById("r_id").innerHTML = this.responseText;
+				
+
+				
+			}
+		}
+		
+		xhttp.open("GET", "http://localhost:8080/Project1/alterReimb.do?r_id=" + r_id + "&new_reimb=" + new_reimb, true);
+		
+		xhttp.send();
+	}
+
+</script>
+</html>

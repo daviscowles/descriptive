@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Paper Company</title>
+</head>
+<body>
+
+    <h3>Paper Company Inc</h3>
+    <h5>"a fun place to work"</h5>
+	
+	<button onclick="getUsers()">View employees</button>
+	<p id="result"></p>
+
+</body>
+
+<script>
+function getUsers() {
+		
+		
+		
+		let xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function() {
+			
+			if(this.readyState == 4 && this.status == 200) {
+				
+				console.log(this.responseText);
+				
+				let UserModel = JSON.parse(this.responseText);
+				
+				let information = ` <h3>User ID: ${UserModel.u_id}</h3>
+									 <h3>Department ID: ${UserModel.d_id}</h3> 
+									 <h3>First: ${UserModel.fname}</h3>
+									 <h3>Last: ${UserModel.lname}</h3>
+									 <h3>Reimbursement Available: ${UserModel.reimb_avail}</h3>
+									 <h3>Reimbursement Pending: ${UserModel.reimb_pend}</h3>
+									 <h3>Superior's User ID: ${UserModel.reports_to}</h3>
+									 <h3>Reimbursement Awarded: ${UserModel.reimb_award}</h3>`
+									 
+                
+                                   
+
+				document.getElementById("result").innerHTML = information;
+			}
+		}
+		
+		xhttp.open("GET", "http://localhost:8080/Project1/showDunder.do", true);
+		
+		xhttp.send();
+	}
+	
+
+</script>
+</html>

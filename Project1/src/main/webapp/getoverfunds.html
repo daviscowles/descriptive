@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Awards exceeding available funds</title>
+</head>
+<body>
+
+	<h3>Awards exceeding available funds:</h3>
+	
+	
+	<button onclick="getOver()">Get Amount</button>
+	<p id="amount"></p>
+	
+
+</body>
+
+<script>
+
+	function getOver() {
+		
+		
+        
+		
+		let xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function() {
+			
+			if(this.readyState == 4 && this.status == 200) {
+				
+				console.log(this.responseText);
+				
+				
+				
+				
+								 	
+				
+				document.getElementById("amount").innerHTML = '$' + this.responseText;
+				
+
+				
+			}
+		}
+		
+		xhttp.open("GET", "http://localhost:8080/Project1/getOverFunds.do", true);
+		
+		xhttp.send();
+	}
+
+</script>
+</html>

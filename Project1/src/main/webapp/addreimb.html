@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Reimbursement Adder</title>
+</head>
+<body>
+    <h3>User ID</h3>
+    <input id="u_id" type="number">
+    <h3>Grading ID</h3>
+    <input id="g_id" type="number">
+    <h3>Event ID</h3>
+    <input id="e_id" type="number">
+    <h3>Date (weeks out)</h3>
+    <input id="date" type="number">
+    <h3>Time (24hr)</h3>
+    <input id="time" type="number">
+    <h3>Address</h3>
+    <input id="address" type="text">
+	<h3>Cost</h3>
+	<input id="cost" type="number">
+	<h3>Description</h3>
+	<input id="desc" type="text">
+	<h3>Cutoff (%)</h3>
+	<input id="cutoff" type="number">
+	<h3>Work-related justification</h3>
+	<input id="justify" type="text">
+	
+
+    <button onclick="addReimb()">Add Reimbursement</button>
+</body>
+<script>
+
+function addReimb() {
+
+	
+    let u_id = document.getElementById("u_id").value;
+    let g_id = document.getElementById("g_id").value;
+    let e_id = document.getElementById("e_id").value;
+    let r_date = Number(document.getElementById("date").value);
+    let r_time = Number(document.getElementById("time").value);
+    let r_address = document.getElementById("address").value;
+    let r_cost = Number(document.getElementById("cost").value);
+    let r_desc = document.getElementById("desc").value;
+    let cutoff = Number(document.getElementById("cutoff").value);  
+	let justify = document.getElementById("justify").value;
+	
+    
+    
+    let xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if(this.readyState == 4 && this.status == 200) {
+            
+			console.log(this.responseText);
+        }
+    }
+
+    
+    xhttp.open("POST", "http://localhost:8080/Project1/addReimb.do", true);
+    
+    xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    
+    
+    xhttp.send("u_id="+u_id+"&g_id="+g_id+"&e_id="+e_id+"&r_date="+r_date+"&r_time="+r_time+"&r_address="+r_address+"&r_cost="+r_cost+"&r_desc="+r_desc+"&cutoff="+cutoff+"&justify="+justify);
+
+}
+
+</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Event Viewer</title>
+</head>
+<body>
+
+	<h3>View event by Reimbursement ID</h3>
+	<input id="rid" type="number">
+	
+	<button onclick="getEvent()">Get Count</button>
+	<p id="event"></p>
+	
+
+</body>
+
+<script>
+
+	function getEvent() {
+		
+		let rid = document.getElementById("rid").value;
+        console.log(rid);
+		
+		let xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function() {
+			
+			if(this.readyState == 4 && this.status == 200) {
+				
+				console.log(this.responseText);
+				
+				let eventModel = JSON.parse(this.responseText);
+				
+				let id = `<h3>Event ID: ${eventModel.e_id}</h3>
+						  <h3>Total approved reimbursements of this type: ${eventModel.coverage}</h3>`
+								 	
+				
+				document.getElementById("event").innerHTML = id;
+				
+
+				
+			}
+		}
+		
+		xhttp.open("GET", "http://localhost:8080/Project1/getEventCount.do", true);
+		
+		xhttp.send();
+	}
+
+</script>
+</html>

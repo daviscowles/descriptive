@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Increment Reimbursement</title>
+</head>
+<body>
+
+	<h3>Reimbursement ID</h3>
+    <input id="r_id" type="number">
+    <h3>My ID</h3>
+    <input id="u_id" type="number">
+
+	<button onclick="incrementReimb()">Increment Reimbursement</button>
+	<p id="result"></p>
+
+</body>
+
+<script>
+
+	function incrementReimb() {
+		
+		let r_id = Number(document.getElementById("r_id").value);
+		let u_id = Number(document.getElementById("u_id").value);
+        console.log(r_id);
+        console.log(u_id);
+		
+		let xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function() {
+			
+			if(this.readyState == 4 && this.status == 200) {
+				
+				console.log(this.responseText);
+				
+				
+				
+				
+				
+				document.getElementById("result").innerHTML = this.responseText;
+			}
+		}
+		
+		xhttp.open("GET", "http://localhost:8080/Project1/incrementReimb.do?r_id=" + r_id + "&u_id=" + u_id, true);
+		
+		xhttp.send();
+	}
+
+</script>
+</html>

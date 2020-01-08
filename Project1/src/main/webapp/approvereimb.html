@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Approve Reimbursement</title>
+</head>
+<body>
+
+	<h3>Reimbursement ID</h3>
+	<input id="pid" type="number">
+	
+	<button onclick="approveReimb()">Approve</button>
+	<p id="r_id"></p>
+	
+
+</body>
+
+<script>
+
+	function approveReimb() {
+		
+		let pid = document.getElementById("pid").value;
+        console.log(pid);
+		
+		let xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function() {
+			
+			if(this.readyState == 4 && this.status == 200) {
+				
+				console.log(this.responseText);
+				
+				
+				
+				
+								 	
+				
+				document.getElementById("r_id").innerHTML = this.responseText;
+				
+
+				
+			}
+		}
+		
+		xhttp.open("GET", "http://localhost:8080/Project1/approveReimb.do?r_id=" + pid, true);
+		
+		xhttp.send();
+	}
+
+</script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>View Reimbursements</title>
+</head>
+<body>
+
+	<h3>View All Reimbursement Requests</h3>
+	
+	
+	<button onclick="showReimb()">View</button>
+	<p id="reimbs"></p>
+	
+
+</body>
+
+<script>
+
+	function showReimb() {
+		
+		
+		
+		let xhttp = new XMLHttpRequest();
+		
+		xhttp.onreadystatechange = function() {
+			
+			if(this.readyState == 4 && this.status == 200) {
+				
+				console.log(this.responseText);
+				
+				let reimbModel = JSON.parse(this.responseText);
+				
+				let information = ` <h3>r_id: ${reimbModel.r_id}</h3>
+									 <h3>u_id: ${reimbModel.u_id}</h3> 
+									 <h3>g_id: ${reimbModel.g_id}</h3>
+									 <h3>e_id: ${reimbModel.e_id}</h3>
+									 <h3>r_date: ${reimbModel.r_date}</h3>
+									 <h3>r_time: ${reimbModel.r_time}</h3>
+									 <h3>r_address: ${reimbModel.r_address}</h3>
+									 <h3>r_cost: ${reimbModel.r_cost}</h3>
+									 <h3>r_desc: ${reimbModel.r_desc}</h3>
+									 <h3>cutoff: ${reimbModel.cutoff}</h3>
+									 <h3>curr_user: ${reimbModel.curr_user}</h3>
+									 <h3>pending: ${reimbModel.pending}</h3>`
+				
+				document.getElementById("result").innerHTML = information;
+			}
+		}
+		
+		xhttp.open("GET", "http://localhost:8080/Project1/showReimb.do", true);
+		
+		xhttp.send();
+	}
+
+</script>
+</html>
